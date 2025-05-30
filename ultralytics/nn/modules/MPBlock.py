@@ -90,7 +90,7 @@ class C3(nn.Module):
 
     def forward(self, x):
         """Forward pass through the CSP bottleneck with 2 convolutions."""
-        # s = self.m(self.cv1(x))
+        s = self.m(self.cv1(x))
         return self.cv3(torch.cat((self.m(self.cv1(x)), self.cv2(x)), 1))
 
 class C3k(C3):
