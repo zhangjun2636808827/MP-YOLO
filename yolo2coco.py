@@ -11,7 +11,7 @@ labels_path = os.path.join(dataset_path, "labels")
 # 类别映射  
 categories = [  
     {"id": 0, "name": "uav"},  
-    {"id": 1, "name": "bird"},  
+    # {"id": 1, "name": "bird"},  
     # 添加更多类别  
 ]  
    
@@ -51,7 +51,7 @@ for split in ['train', 'test', 'val']:
                 print("dirs=",label_path)
                 image_info = {  
                     "file_name": os.path.basename(root)+"/"+img_name,  
-                    "id": len(coco_format["images"]) + 1,  
+                    "id": len(coco_format["images"]),  
                     "width": img_width,  
                     "height": img_height  
                 }  
@@ -72,7 +72,7 @@ for split in ['train', 'test', 'val']:
                                 annotation = {  
                                     "id": annotation_id,  
                                     "image_id": image_info["id"],  
-                                    "category_id": int(category_id) + 1,  
+                                    "category_id": int(category_id),  
                                     "bbox": bbox,  
                                     "area": bbox[2] * bbox[3],  
                                     "iscrowd": 0  
