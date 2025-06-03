@@ -5,7 +5,7 @@ from ultralytics import YOLO
 # model = YOLO("yolo11n.pt")
 # /home/zj/Project/yolov11/ultralytics/runs/detect/yolo11nMultilittle_biasconv4_biasc3k2_startblock5_batch8/weights/best.pt
 # model = YOLO("yaml/yolo11n.yaml")
-yaml_name = "yolov11n-p2"
+yaml_name = "yolov8n-p2"
 model = YOLO("yaml/" + yaml_name + ".yaml")
 print(model)
 # Train the model/home/zj/Dataset/anti_uav410/test.txt/home/zj/Project/yolov11/ultralytics/yaml/yolo11n_useAllV1.yaml

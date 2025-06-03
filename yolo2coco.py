@@ -3,8 +3,8 @@ import json
 from PIL import Image  
    
 # 设置数据集路径  
-output_dir = "/home/zj/Dataset/anti_uav410"   # 修改为 YOLO 格式的数据集路径；  
-dataset_path = "/home/zj/Dataset/anti_uav410"  # 修改为你想输出的 COCO 格式数据集路径  
+output_dir = "/home/liu/Dataset/anti_uav410"   # 修改为 YOLO 格式的数据集路径；  
+dataset_path = "/home/liu/Dataset/anti_uav410"  # 修改为你想输出的 COCO 格式数据集路径  
 images_path = os.path.join(dataset_path, "images")  
 labels_path = os.path.join(dataset_path, "labels")  
    
