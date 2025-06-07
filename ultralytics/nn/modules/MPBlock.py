@@ -28,6 +28,25 @@ class Conv(nn.Module):
     def forward_fuse(self, x):
         """Perform transposed convolution of 2D data."""
         return self.act(self.conv(x))
+    
+class L_MPBlock(nn.Module):
+
+    def __init__(self, c1, c2, k=3, s=1, p=1, g=1, d=1, act=True):
+
+        super().__init__()#p = [(2, 0, 2, 0), (0, 2, 0, 2), (0, 2, 2, 0), (2, 0, 0, 2)]
+        self.pad1 = nn.ZeroPad2d(padding=((p, p, p, p)))#(2,1,1,0)
+        self.pad2 = nn.ZeroPad2d(padding=((0, 2*p, p, p)))#(1,2,1,0)
+        self.pad3 = nn.ZeroPad2d(padding=((p, p, 0, 2*p)))#(1,0,2,1)
+        self.pad4 = nn.ZeroPad2d(padding=((0, 2*p,0 , 2*p)))#(0,1,1,2)
+        self.bias_conv = Conv(c1, c2 // 4, k, s=s, p=0)
+
+    def forward(self, x):
+        y1 = self.bias_conv(self.pad1(x))
+        y2 = self.bias_conv(self.pad2(x))
+        y3 = self.bias_conv(self.pad3(x))
+        y4 = self.bias_conv(self.pad4(x))
+        return torch.cat([y1, y2, y3, y4], dim=1)
+
 
 class MPBlock(nn.Module):
 
