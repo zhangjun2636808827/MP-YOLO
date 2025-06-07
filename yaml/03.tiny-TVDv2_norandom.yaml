@@ -8,10 +8,10 @@
 #     └── coco128  ← downloads here (7 MB)
 
 # Train/val/test sets as 1) dir: path/to/imgs, 2) file: path/to/imgs.txt, or 3) list: [path/to/imgs1, path/to/imgs2, ..]
-path: /home/zj/Dataset/anti_uav410 # dataset root dir
-train: train.txt # train images (relative to 'path') 128 images
-val: val.txt # val images (relative to 'path') 128 images
-test: test.txt # test images (optional)
+path: /home/zj/Dataset/tiny-TVDv2 # dataset root dir
+train: train_norandom.txt # train images (relative to 'path') 128 images
+val: val_norandom.txt # val images (relative to 'path') 128 images
+test: val_norandom.txt # test images (optional)
 
 # Classes
 names:
