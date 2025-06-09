@@ -8,11 +8,15 @@ conda activate yolov11
 if [ "$1" == "run1" ]; then  
     # 执行第一个训练脚本  
     echo "Running script for run1..."  
-    nohup python train_Antiuav410_run1.py > nohup_run1.log 2>&1 &  
+    nohup python train_Antiuav410.py > nohup_run1.log 2>&1 &  
 elif [ "$1" == "run2" ]; then  
     # 执行第二个训练脚本  
     echo "Running script for run2..."  
-    nohup python train_Antiuav410_run2.py > nohup_run2.log 2>&1 &  
+    nohup python train_IRSTD-1k.py > nohup_run2.log 2>&1 &  
+elif [ "$1" == "run3" ]; then  
+    # 执行第二个训练脚本  
+    echo "Running script for run3..."  
+    nohup python train_SIRST-UAVB.py > nohup_run3.log 2>&1 &  
 else  
     echo "Usage: ./train.sh {run1|run2}"  
     exit 1  
