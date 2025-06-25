@@ -1,7 +1,7 @@
 #!/bin/bash  
 
 # 要监控的进程名称部分  
-PROCESS_NAME="train_TVD.py"  
+PROCESS_NAME="train_TUD.py"  
 # 要运行的下一个脚本命令  
 NEXT_COMMAND="nohup python train_TUD.py > tud.log 2>&1 &"  
 

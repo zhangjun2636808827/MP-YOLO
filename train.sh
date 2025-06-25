@@ -17,6 +17,10 @@ elif [ "$1" == "run3" ]; then
     # 执行第二个训练脚本  
     echo "Running script for run3..."  
     nohup python train_SIRST-UAVB.py > nohup_run3.log 2>&1 &  
+elif [ "$1" == "run4" ]; then  
+    # 执行第二个训练脚本  
+    echo "Running script for run3..."  
+    nohup python train_TUD.py > nohup_run4.log 2>&1 &  
 else  
     echo "Usage: ./train.sh {run1|run2}"  
     exit 1  

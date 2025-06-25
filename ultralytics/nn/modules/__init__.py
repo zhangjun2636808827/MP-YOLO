@@ -17,7 +17,7 @@ Example:
     ```
 """
 
-from .MPBlock import MPBlock,MPCBlock,L_MPBlock
+from .MPBlock import MPBlock,MPCBlock,L_MPBlock,L2_MPBlock,L4_MPBlock,L8_MPBlock,L16_MPBlock,L32_MPBlock
 from .EMBlock import EMBlock
 from .block import (
     C1,
@@ -163,5 +163,9 @@ __all__ = (
     "L_MPBlock",
     "L_MPCBlock",
     "EMBlock",
-
+    "L2_MPBlock",
+    "L4_MPBlock",
+    "L8_MPBlock",
+    "L16_MPBlock",
+    "L32_MPBlock",
 )

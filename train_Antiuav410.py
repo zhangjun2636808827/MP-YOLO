@@ -12,10 +12,10 @@ print(model)
 train_results = model.train(
     name = yaml_name,
     data="yaml/02.anti_uav410.yaml",  # path to dataset YAML
-    epochs=300,  # number of training epochs
-    imgsz=640,  # training image size
+    epochs=30,  # number of training epochs
+    imgsz=641,  # training image size
     device="0",  # device to run on, i.e. device=0 or device=0,1,2,3 or device=cpu
-    batch= 32,  # batch size
+    batch= 8,  # batch size
     amp = True,#加速
     visualize = True,#可以保存每一层的特征图。 
     profile = True,#可以记录每一层的计算时间。
