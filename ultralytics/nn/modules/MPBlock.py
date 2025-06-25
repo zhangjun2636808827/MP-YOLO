@@ -38,11 +38,12 @@ class L2_MPBlock(nn.Module):
         self.pad3 = nn.ZeroPad2d(padding=((p, 0, 0, p)))#(1,0,2,1)
         self.pad4 = nn.ZeroPad2d(padding=((0, p,0 , p)))#(0,1,1,2)
         self.bias_conv = Conv(c1, c2 // 4, k, s=s, p=0)
+        self.bias_conv2 = Conv(c1, c2 // 4, k, s=s, p=0)
 
     def forward(self, x):
         y1 = self.bias_conv(self.pad1(x))
-        y2 = self.bias_conv(self.pad2(x))
-        y3 = self.bias_conv(self.pad3(x))
+        y2 = self.bias_conv2(self.pad2(x))
+        y3 = self.bias_conv2(self.pad3(x))
         y4 = self.bias_conv(self.pad4(x))
         return torch.cat([y1, y2, y3, y4], dim=1)
 class L4_MPBlock(nn.Module):
@@ -69,14 +70,18 @@ class L8_MPBlock(nn.Module):
         self.pad2 = nn.ZeroPad2d(padding=((0, p, p, 0)))#(1,2,1,0)
         self.pad3 = nn.ZeroPad2d(padding=((p, 0, 0, p)))#(1,0,2,1)
         self.pad4 = nn.ZeroPad2d(padding=((0, p,0 , p)))#(0,1,1,2)
-        self.bias_conv = Conv(c1, c2 // 4, k, s=s, p=0)
+        self.bias_conv = Conv(c1, c2 // 8, k, s=s, p=0)
 
     def forward(self, x):
         y1 = self.bias_conv(self.pad1(x))
-        y2 = self.bias_conv(self.pad2(x))
-        y3 = self.bias_conv(self.pad3(x))
-        y4 = self.bias_conv(self.pad4(x))
-        return torch.cat([y1, y2, y3, y4], dim=1)
+        y2 = self.bias_conv(self.pad1(x))
+        y3 = self.bias_conv(self.pad2(x))
+        y4 = self.bias_conv(self.pad2(x))
+        y5 = self.bias_conv(self.pad3(x))
+        y6 = self.bias_conv(self.pad3(x))
+        y7 = self.bias_conv(self.pad4(x))
+        y8 = self.bias_conv(self.pad4(x))
+        return torch.cat([y1, y2, y3, y4,y5, y6, y7, y8], dim=1)
 class L16_MPBlock(nn.Module):
 
     def __init__(self, c1, c2, k=3, s=1, p=1, g=1, d=1, act=True):
@@ -85,30 +90,27 @@ class L16_MPBlock(nn.Module):
         self.pad2 = nn.ZeroPad2d(padding=((0, p, p, 0)))#(1,2,1,0)
         self.pad3 = nn.ZeroPad2d(padding=((p, 0, 0, p)))#(1,0,2,1)
         self.pad4 = nn.ZeroPad2d(padding=((0, p,0 , p)))#(0,1,1,2)
-        self.bias_conv = Conv(c1, c2 // 4, k, s=s, p=0)
+        self.bias_conv = Conv(c1, c2 // 16, k, s=s, p=0)
 
     def forward(self, x):
         y1 = self.bias_conv(self.pad1(x))
-        y2 = self.bias_conv(self.pad2(x))
-        y3 = self.bias_conv(self.pad3(x))
-        y4 = self.bias_conv(self.pad4(x))
-        return torch.cat([y1, y2, y3, y4], dim=1)
-class L32_MPBlock(nn.Module):
+        y2 = self.bias_conv(self.pad1(x))
+        y3 = self.bias_conv(self.pad1(x))
+        y4 = self.bias_conv(self.pad1(x))
+        y5 = self.bias_conv(self.pad2(x))
+        y6 = self.bias_conv(self.pad2(x))
+        y7 = self.bias_conv(self.pad2(x))
+        y8 = self.bias_conv(self.pad2(x))
+        y9 = self.bias_conv(self.pad3(x))
+        y10 = self.bias_conv(self.pad3(x))
+        y11 = self.bias_conv(self.pad3(x))
+        y12 = self.bias_conv(self.pad3(x))
+        y13 = self.bias_conv(self.pad4(x))
+        y14 = self.bias_conv(self.pad4(x))
+        y15 = self.bias_conv(self.pad4(x))
+        y16 = self.bias_conv(self.pad4(x))
+        return torch.cat([y1, y2, y3, y4,y5, y6, y7, y8,y9, y10, y11, y12,y13, y14, y15, y16], dim=1)
 
-    def __init__(self, c1, c2, k=3, s=1, p=1, g=1, d=1, act=True):
-        super().__init__()#p = [(2, 0, 2, 0), (0, 2, 0, 2), (0, 2, 2, 0), (2, 0, 0, 2)]
-        self.pad1 = nn.ZeroPad2d(padding=((p, 0, p, 0)))#(2,1,1,0)
-        self.pad2 = nn.ZeroPad2d(padding=((0, p, p, 0)))#(1,2,1,0)
-        self.pad3 = nn.ZeroPad2d(padding=((p, 0, 0, p)))#(1,0,2,1)
-        self.pad4 = nn.ZeroPad2d(padding=((0, p,0 , p)))#(0,1,1,2)
-        self.bias_conv = Conv(c1, c2 // 4, k, s=s, p=0)
-
-    def forward(self, x):
-        y1 = self.bias_conv(self.pad1(x))
-        y2 = self.bias_conv(self.pad2(x))
-        y3 = self.bias_conv(self.pad3(x))
-        y4 = self.bias_conv(self.pad4(x))
-        return torch.cat([y1, y2, y3, y4], dim=1)
     
 class L_MPBlock(nn.Module):
 
