@@ -5,7 +5,7 @@ from ultralytics import YOLO
 # model = YOLO("yolo11n.pt")
 # /home/zj/Project/yolov11/ultralytics/runs/detect/yolo11nMultilittle_biasconv4_biasc3k2_startblock5_batch8/weights/best.pt
 # model = YOLO("yaml/yolo11n.yaml")
-yaml_name = "yolov11n-p2-L2MPB"
+yaml_name = "n-MP-YOLO_NEW"
 model = YOLO("yaml/" + yaml_name + ".yaml")
 print(model)
 # Train the model/home/zj/Dataset/anti_uav410/test.txt/home/zj/Project/yolov11/ultralytics/yaml/yolo11n_useAllV1.yaml
@@ -15,19 +15,19 @@ train_results = model.train(
     epochs=30,  # number of training epochs
     imgsz=640,  # training image size
     device="0",  # device to run on, i.e. device=0 or device=0,1,2,3 or device=cpu
-    batch= 8,  # batch size
+    batch= 32,  # batch size
     amp = True,#加速
     visualize = True,#可以保存每一层的特征图。 
     profile = True,#可以记录每一层的计算时间。
     lr0=0.01, 
     lrf=0.01,
     workers = 4,#线程
-    patience = 50,#耐心参数（100轮无提升）
+    patience = 10,#耐心参数（100轮无提升）
     cache = False,#是否缓存数据集。
     pretrained = False,#是否使用预训练模型。
     optimizer = "auto",#优化器类型，auto 表示自动选择。
     verbose = True,#是否打印详细信息。
-    seed = 42,# 随机种子。
+    seed = 41,# 随机种子。
     deterministic=True, #是否使用确定性算法。c
     # single_cls=True,
     dynamic = False,

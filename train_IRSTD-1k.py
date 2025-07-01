@@ -7,13 +7,13 @@ from ultralytics import YOLO
 # model = YOLO("yaml/yolo11n.yaml")
 
 # model = YOLO("yaml/yolo11nMultilittle_biasconv4_biasc3k2_startblock5.yaml").load("/home/zj/Project/yolov11/ultralytics/runs/detect/yolo11nMultilittle_biasconv4_biasc3k2_startblock5_batch8/weights/best.pt")
-model = YOLO("yaml/yolov11n-p2_biasConvV4_biasc3k2V4v3_StarBlock5.yaml").load("/home/zj/Project/yolov11/ultralytics/runs/detect/02.yolov11n-p2_biasConvV4_biasc3k2V4v3_StarBlock5_batch8/weights/best.pt")
-
+# model = YOLO("yaml/yolov11n-p2_biasConvV4_biasc3k2V4v3_StarBlock5.yaml").load("/home/zj/Project/yolov11/ultralytics/runs/detect/02.yolov11n-p2_biasConvV4_biasc3k2V4v3_StarBlock5_batch8/weights/best.pt")
+model = YOLO("yaml/yolo11x-p1_MPBlock_MPCBlock_EMBlock.yaml")
 
 print(model)
 # Train the model/home/zj/Dataset/anti_uav410/test.txt/home/zj/Project/yolov11/ultralytics/yaml/yolo11n_useAllV1.yaml
 train_results = model.train(
-    name = "00.yolov11n-p2_biasConvV4_biasc3k2V4v3_StarBlock5_load_batch32",
+    name = "p1_MPBlock_MPCBlock_EMBlockttest",
     data="yaml/00.IRSTD-1k.yaml",  # path to dataset YAML
     epochs=700,  # number of training epochs
     imgsz=640,  # training image size
