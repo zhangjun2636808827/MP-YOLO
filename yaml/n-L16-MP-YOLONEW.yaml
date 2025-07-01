@@ -44,19 +44,19 @@ head:
   - [[-1, 0], 1, Concat, [1]] # cat backbone P2 21
   - [-1, 2, EMBlock, [64]] #  (P3/8-small) 22 det1
 
-  - [-1, 1, Conv, [64, 3, 2]] #  23
+  - [-1, 1, L16_MPBlock, [64, 3, 2]] #  23
   - [[-1, 19], 1, Concat, [1]] # cat head P4 24
   - [-1, 2, EMBlock, [128]] # 19 (P4/16-medium)25
 
-  - [-1, 1, Conv, [128, 3, 2]] #26
+  - [-1, 1, L16_MPBlock, [128, 3, 2]] #26
   - [[-1, 16], 1, Concat, [1]] # cat head P4  27
   - [-1, 2, EMBlock, [256]] # 19 (P4/16-medium)28
 
-  - [-1, 1, Conv, [256, 3, 2]] #29
+  - [-1, 1, L16_MPBlock, [256, 3, 2]] #29
   - [[-1, 13], 1, Concat, [1]] # cat head 32
   - [-1, 2, EMBlock, [512]] # 19 (P4/16-medium)31
 
-  - [-1, 1, Conv, [512, 3, 2]] #32
+  - [-1, 1, L16_MPBlock, [512, 3, 2]] #32
   - [[-1, 10], 1, Concat, [1]] # cat head P5 33
   - [-1, 2, EMBlock, [1024]] # 22 (P5/32-large)34
 
