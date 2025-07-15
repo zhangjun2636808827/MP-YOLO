@@ -39,13 +39,14 @@ class L2_MPM(nn.Module):
         self.pad4 = nn.ZeroPad2d(padding=((0, p,0 , p)))#(0,1,1,2)
         self.bias_conv = Conv(c1, c2 // 4, k, s=s, p=0)
         self.bias_conv2 = Conv(c1, c2 // 4, k, s=s, p=0)
+        self.fusion = Conv(c2, c2, 1, s=1)  # Fusion layer to combine outputs
 
     def forward(self, x):
         y1 = self.bias_conv(self.pad1(x))
         y2 = self.bias_conv2(self.pad2(x))
         y3 = self.bias_conv2(self.pad3(x))
         y4 = self.bias_conv(self.pad4(x))
-        return torch.cat([y1, y2, y3, y4], dim=1)
+        return self.fusion(torch.cat([y1, y2, y3, y4], dim=1))
 class L4_MPM(nn.Module):
 
     def __init__(self, c1, c2, k=3, s=1, p=1, g=1, d=1, act=True):
@@ -55,13 +56,14 @@ class L4_MPM(nn.Module):
         self.pad3 = nn.ZeroPad2d(padding=((p, 0, 0, p)))#(1,0,2,1)
         self.pad4 = nn.ZeroPad2d(padding=((0, p,0 , p)))#(0,1,1,2)
         self.bias_conv = Conv(c1, c2 // 4, k, s=s, p=0)
+        self.fusion = Conv(c2, c2, 1, s=1)  # Fusion layer to combine outputs
 
     def forward(self, x):
         y1 = self.bias_conv(self.pad1(x))
         y2 = self.bias_conv(self.pad2(x))
         y3 = self.bias_conv(self.pad3(x))
         y4 = self.bias_conv(self.pad4(x))
-        return torch.cat([y1, y2, y3, y4], dim=1)
+        return  self.fusion(torch.cat([y1, y2, y3, y4], dim=1))
 class L8_MPM(nn.Module):
 
     def __init__(self, c1, c2, k=3, s=1, p=1, g=1, d=1, act=True):
@@ -71,6 +73,7 @@ class L8_MPM(nn.Module):
         self.pad3 = nn.ZeroPad2d(padding=((p, 0, 0, p)))#(1,0,2,1)
         self.pad4 = nn.ZeroPad2d(padding=((0, p,0 , p)))#(0,1,1,2)
         self.bias_conv = Conv(c1, c2 // 8, k, s=s, p=0)
+        self.fusion = Conv(c2, c2, 1, s=1)  # Fusion layer to combine outputs
 
     def forward(self, x):
         y1 = self.bias_conv(self.pad1(x))
@@ -81,7 +84,7 @@ class L8_MPM(nn.Module):
         y6 = self.bias_conv(self.pad3(x))
         y7 = self.bias_conv(self.pad4(x))
         y8 = self.bias_conv(self.pad4(x))
-        return torch.cat([y1, y2, y3, y4,y5, y6, y7, y8], dim=1)
+        return  self.fusion(torch.cat([y1, y2, y3, y4,y5, y6, y7, y8], dim=1))
 class L16_MPM(nn.Module):
 
     def __init__(self, c1, c2, k=3, s=1, p=1, g=1, d=1, act=True):
@@ -91,6 +94,7 @@ class L16_MPM(nn.Module):
         self.pad3 = nn.ZeroPad2d(padding=((p, 0, 0, p)))#(1,0,2,1)
         self.pad4 = nn.ZeroPad2d(padding=((0, p,0 , p)))#(0,1,1,2)
         self.bias_conv = Conv(c1, c2 // 16, k, s=s, p=0)
+        self.fusion = Conv(c2, c2, 1, s=1)  # Fusion layer to combine outputs
 
     def forward(self, x):
         y1 = self.bias_conv(self.pad1(x))
@@ -109,7 +113,7 @@ class L16_MPM(nn.Module):
         y14 = self.bias_conv(self.pad4(x))
         y15 = self.bias_conv(self.pad4(x))
         y16 = self.bias_conv(self.pad4(x))
-        return torch.cat([y1, y2, y3, y4,y5, y6, y7, y8,y9, y10, y11, y12,y13, y14, y15, y16], dim=1)
+        return  self.fusion(torch.cat([y1, y2, y3, y4,y5, y6, y7, y8,y9, y10, y11, y12,y13, y14, y15, y16], dim=1))
 
 class MPM(nn.Module):
 
@@ -139,10 +143,10 @@ class MPM(nn.Module):
 class Block(nn.Module):#v4
     def __init__(self, c1, c2, g=1, k=(3, 3), e=0.5):
         super().__init__()
-        self.pad1 = nn.ZeroPad2d(padding=((1, 1, 1, 1)))#(2,1,1,0)
-        self.pad2 = nn.ZeroPad2d(padding=((0, 2, 1, 1)))#(1,2,1,0)
-        self.pad3 = nn.ZeroPad2d(padding=((1, 1, 0, 2)))#(1,0,2,1)
-        self.pad4 = nn.ZeroPad2d(padding=((0, 2, 0, 2)))#(0,1,1,2)
+        self.pad1 = nn.ZeroPad2d(padding=((0, 2, 1, 1)))#(2,1,1,0)
+        self.pad2 = nn.ZeroPad2d(padding=((2, 0, 1, 1)))#(1,2,1,0)
+        self.pad3 = nn.ZeroPad2d(padding=((1, 1, 2, 0)))#(1,0,2,1)
+        self.pad4 = nn.ZeroPad2d(padding=((1, 1, 0, 2)))#(0,1,1,2)
 
         self.biasconv1 = Conv(c1, c2//4, k[1], s=1,p=0, g=g)
         self.biasconv2 = Conv(c1, c2//4, k[1], s=1,p=0, g=g)
@@ -171,6 +175,7 @@ class Block(nn.Module):#v4
 
         result = self.conv(y9) + self.conv(y10)
         return result
+    
 class C3(nn.Module):
     """CSP Bottleneck with 3 convolutions."""
 
@@ -221,7 +226,7 @@ class C2f(nn.Module):
         y.extend(m(y[-1]) for m in self.m)
         return self.cv2(torch.cat(y, 1))
 
-class MPF(C2f):
+class BFM(C2f):
     """Faster Implementation of CSP Bottleneck with 2 convolutions."""
 
     def __init__(self, c1, c2, n=1, c3k=False, e=0.5, g=1):
