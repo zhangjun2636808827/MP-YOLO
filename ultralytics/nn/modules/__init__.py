@@ -16,8 +16,8 @@ Example:
     os.system(f"onnxslim {f} {f} && open {f}")  # pip install onnxslim
     ```
 """
-
-from .MPBlock import MPBlock,MPCBlock,L_MPBlock,L2_MPBlock,L4_MPBlock,L8_MPBlock,L16_MPBlock
+from.MP import MPM, MPF
+from .MPBlock import MPBlock,MPCBlock,L_MPBlock,L2_MPBlock,L4_MPBlock,L8_MPBlock,L16_MPBlock,MPBlockV2
 from .EMBlock import EMBlock
 from .block import (
     C1,
@@ -167,4 +167,7 @@ __all__ = (
     "L4_MPBlock",
     "L8_MPBlock",
     "L16_MPBlock",
+    "MPBlockV2",
+    "MPM", 
+    "MPF",
 )

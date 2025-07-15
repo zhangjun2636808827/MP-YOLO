@@ -4,15 +4,18 @@ from ultralytics import YOLO
 
 # model = YOLO("yolo11n.pt")
 
-# model = YOLO("yaml/yolo11n.yaml")
-# model = YOLO("yaml/yolo11nMultilittle.yaml")
-model = YOLO("yaml/yolo11nMultilittle_biasconv4_biasc3k2_startblock5.yaml")
+# model = YOLO("/home/zj/Project/MP-YOLO/MP-YOLO-8.3.7/best.pt")
+# model = YOLO("/home/zj/Project/MP-YOLO/MP-YOLO-8.3.7/best.pt")
+# yaml_name = "L-MP-YOLOn"
+# model = YOLO("yaml/" + yaml_name + ".yaml").load("/home/zj/Project/MP-YOLO/MP-YOLO-8.3.7/best.pt")
+yaml_name = "MP-YOLOn"
+model = YOLO("yaml/" + yaml_name + ".yaml")
 # model = YOLO("/home/zj/Project/yolov11/ultralytics/ultralytics/cfg/models/11/yolov11n-p2.yaml").load("yolo11n.pt")
 # model = YOLO("yaml/yolo11n.yaml").load("yolo11n.pt")
 print(model)
 # Train the model/home/zj/Dataset/anti_uav410/test.txt/home/zj/Project/yolov11/ultralytics/yaml/yolo11n_useAllV1.yaml
 train_results = model.train(
-    name = "01.yolo11nMultilittle_biasconv4_biasc3k2_startblock5_batch32",
+    name = "01.UAVB-MP-YOLOn",
     data="yaml/01.SIRST-UAVB.yaml",  # path to dataset YAML
     epochs=700,  # number of training epochs
     imgsz=640,  # training image size

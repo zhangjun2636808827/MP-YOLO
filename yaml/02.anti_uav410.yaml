@@ -11,8 +11,8 @@
 path: /home/zj/Dataset/anti_uav410 # dataset root dir
 train: train.txt # train images (relative to 'path') 128 images
 val: val.txt # val images (relative to 'path') 128 images
-test: test.txt # test images (optional)
-
+test: val.txt # test images (optional)
+# "/home/zj/Dataset/anti_uav410/val.txt"
 # Classes
 names:
   0: uav

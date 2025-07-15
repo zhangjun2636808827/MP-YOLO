@@ -2,24 +2,21 @@ from ultralytics import YOLO
 
 # Load a model
 
-# model = YOLO("yolo11n.pt")
-# /home/zj/Project/yolov11/ultralytics/runs/detect/yolo11nMultilittle_biasconv4_biasc3k2_startblock5_batch8/weights/best.pt
-# model = YOLO("yaml/yolo11n.yaml")
-yaml_name = "yolov11n-p2_EMM"
+yaml_name = "MP-YOLO_MPM"
 model = YOLO("yaml/" + yaml_name + ".yaml")
 print(model)
 # Train the model/home/zj/Dataset/anti_uav410/test.txt/home/zj/Project/yolov11/ultralytics/yaml/yolo11n_useAllV1.yaml
 train_results = model.train(
-    name = yaml_name,
+    name = "02."+yaml_name,
     data="yaml/02.anti_uav410.yaml",  # path to dataset YAML
-    epochs=30,  # number of training epochs
+    epochs=100,  # number of training epochs
     imgsz=640,  # training image size
     device="0",  # device to run on, i.e. device=0 or device=0,1,2,3 or device=cpu
     batch= 8,  # batch size
     amp = True,#加速
     visualize = True,#可以保存每一层的特征图。 
     profile = True,#可以记录每一层的计算时间。
-    lr0=0.01, 
+    lr0=0.02, 
     lrf=0.01,
     workers = 4,#线程
     patience = 10,#耐心参数（100轮无提升）

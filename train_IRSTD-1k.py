@@ -7,18 +7,18 @@ from ultralytics import YOLO
 # model = YOLO("yaml/yolo11n.yaml")
 
 # model = YOLO("yaml/yolo11nMultilittle_biasconv4_biasc3k2_startblock5.yaml").load("/home/zj/Project/yolov11/ultralytics/runs/detect/yolo11nMultilittle_biasconv4_biasc3k2_startblock5_batch8/weights/best.pt")
-# model = YOLO("yaml/yolov11n-p2_biasConvV4_biasc3k2V4v3_StarBlock5.yaml").load("/home/zj/Project/yolov11/ultralytics/runs/detect/02.yolov11n-p2_biasConvV4_biasc3k2V4v3_StarBlock5_batch8/weights/best.pt")
-model = YOLO("yaml/yolo11x-p1_MPBlock_MPCBlock_EMBlock.yaml")
-
+# model = YOLO("yaml/n-MP-YOLO.yaml").load("/home/zj/Project/MP-YOLO/MP-YOLO-8.3.7/MP-YOLO/runs/detect/02.yolo11n-p1_MPBlock_MPCBlock_EMBlock3/weights/best.pt")
+# model = YOLO("/home/zj/Project/MP-YOLO/MP-YOLO-8.3.7/MP-YOLO/runs/detect/02.yolo11n-p1_MPBlock_MPCBlock_EMBlock3/weights/best.pt")
+model = YOLO("yaml/L-MP-YOLOn.yaml")
 print(model)
 # Train the model/home/zj/Dataset/anti_uav410/test.txt/home/zj/Project/yolov11/ultralytics/yaml/yolo11n_useAllV1.yaml
 train_results = model.train(
-    name = "p1_MPBlock_MPCBlock_EMBlockttest",
+    name = "01.n-MP-YOLO",
     data="yaml/00.IRSTD-1k.yaml",  # path to dataset YAML
     epochs=700,  # number of training epochs
     imgsz=640,  # training image size
     device="0",  # device to run on, i.e. device=0 or device=0,1,2,3 or device=cpu
-    batch= 32,  # batch size
+    batch= 8,  # batch size
     amp = True,#加速
     visualize = True,#可以保存每一层的特征图。 
     profile = True,#可以记录每一层的计算时间。
