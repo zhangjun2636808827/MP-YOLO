@@ -9,11 +9,13 @@ from ultralytics import YOLO
 # model = YOLO("yaml/yolo11nMultilittle_biasconv4_biasc3k2_startblock5.yaml").load("/home/zj/Project/yolov11/ultralytics/runs/detect/yolo11nMultilittle_biasconv4_biasc3k2_startblock5_batch8/weights/best.pt")
 # model = YOLO("yaml/n-MP-YOLO.yaml").load("/home/zj/Project/MP-YOLO/MP-YOLO-8.3.7/MP-YOLO/runs/detect/02.yolo11n-p1_MPBlock_MPCBlock_EMBlock3/weights/best.pt")
 # model = YOLO("/home/zj/Project/MP-YOLO/MP-YOLO-8.3.7/MP-YOLO/runs/detect/02.yolo11n-p1_MPBlock_MPCBlock_EMBlock3/weights/best.pt")
-model = YOLO("experiment/Comparative/MP-YOLO_MPM_BFM_EMM.yaml")
+yaml_name = "MP-YOLO_MPM_BFM_EMM_mpm"
+model = YOLO("experiment/Comparative/" + yaml_name + ".yaml").load("MP-YOLO.pt")
 print(model)
 # Train the model/home/zj/Dataset/anti_uav410/test.txt/home/zj/Project/yolov11/ultralytics/yaml/yolo11n_useAllV1.yaml
 train_results = model.train(
-    name = "01.n-MP-YOLO",
+    name = "00."+yaml_name,
+    project = "runs/Comparative",  # project name
     data="yaml/00.IRSTD-1k.yaml",  # path to dataset YAML
     epochs=700,  # number of training epochs
     imgsz=640,  # training image size

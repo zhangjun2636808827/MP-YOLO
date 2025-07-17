@@ -8,14 +8,13 @@ from ultralytics import YOLO
 # model = YOLO("/home/zj/Project/MP-YOLO/MP-YOLO-8.3.7/best.pt")
 # yaml_name = "L-MP-YOLOn"
 # model = YOLO("yaml/" + yaml_name + ".yaml").load("/home/zj/Project/MP-YOLO/MP-YOLO-8.3.7/best.pt")
-yaml_name = "MP-YOLO_MPM_BFM_EMM"
-model = YOLO("experiment/Comparative/" + yaml_name + ".yaml")
-# model = YOLO("/home/zj/Project/yolov11/ultralytics/ultralytics/cfg/models/11/yolov11n-p2.yaml").load("yolo11n.pt")
-# model = YOLO("yaml/yolo11n.yaml").load("yolo11n.pt")
+yaml_name = "MP-YOLO_MPM_BFM_EMM_mpm"
+model = YOLO("experiment/Comparative/" + yaml_name + ".yaml").load("MP-YOLO.pt")
 print(model)
 # Train the model/home/zj/Dataset/anti_uav410/test.txt/home/zj/Project/yolov11/ultralytics/yaml/yolo11n_useAllV1.yaml
 train_results = model.train(
-    name = "01.UAVB-MP-YOLOn",
+    name = "01."+yaml_name,
+    project = "runs/Comparative",  # project name
     data="yaml/01.SIRST-UAVB.yaml",  # path to dataset YAML
     epochs=700,  # number of training epochs
     imgsz=640,  # training image size
@@ -32,7 +31,7 @@ train_results = model.train(
     # pretrained = False,#是否使用预训练模型。
     optimizer = "auto",#优化器类型，auto 表示自动选择。
     verbose = True,#是否打印详细信息。
-    seed = 40,# 随机种子。
+    seed = 42,# 随机种子。
     deterministic=True, #是否使用确定性算法。c
     save_period = 1,
     # single_cls=False,
