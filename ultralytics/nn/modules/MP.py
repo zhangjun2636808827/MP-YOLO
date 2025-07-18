@@ -128,17 +128,13 @@ class MPM(nn.Module):
         self.bias_conv2 = Conv(c1, c2 // 4, k, s=s, p=0)
         self.bias_conv3 = Conv(c1, c2 // 4, k, s=s, p=0)
         self.bias_conv4 = Conv(c1, c2 // 4, k, s=s, p=0)
-        self.fusion = Conv(c2, c2, 1, s=1)  # Fusion layer to combine outputs
 
     def forward(self, x):
         y1 = self.bias_conv1(self.pad1(x))
         y2 = self.bias_conv2(self.pad2(x))
         y3 = self.bias_conv3(self.pad3(x))
         y4 = self.bias_conv4(self.pad4(x))
-        return self.fusion(torch.cat([y1, y2, y3, y4], dim=1))
-
-
-
+        return torch.cat([y1, y2, y3, y4], dim=1)
 
 class Block(nn.Module):#v4
     def __init__(self, c1, c2, g=1, k=(3, 3), e=0.5):
