@@ -46,18 +46,18 @@ head:
 
   - [-1, 1, Conv, [64, 3, 2]] #  23
   - [[-1, 19], 1, Concat, [1]] # cat head P4 24
-  - [-1, 2, C3k2, [128, False]] # 19 (P4/16-medium)25
+  - [-1, 2, C3k2, [128, True]] # 19 (P4/16-medium)25
 
   - [-1, 1, Conv, [128, 3, 2]] #26
   - [[-1, 16], 1, Concat, [1]] # cat head P4  27
-  - [-1, 2, C3k2, [256, False]] # 19 (P4/16-medium)28
+  - [-1, 2, C3k2, [256, True]] # 19 (P4/16-medium)28
 
   - [-1, 1, Conv, [256, 3, 2]] #29
   - [[-1, 13], 1, Concat, [1]] # cat head 32
-  - [-1, 2, C3k2, [512, False]] # 19 (P4/16-medium)31
+  - [-1, 2, C3k2, [512, True]] # 19 (P4/16-medium)31
 
   - [-1, 1, Conv, [512, 3, 2]] #32
   - [[-1, 10], 1, Concat, [1]] # cat head P5 33
-  - [-1, 2, C3k2, [1024, False]] # 22 (P5/32-large)34
+  - [-1, 2, C3k2, [1024, True]] # 22 (P5/32-large)34
 
   - [[25, 28, 31, 34], 1, Detect, [nc]] # Detect(P3, P4, P5)
