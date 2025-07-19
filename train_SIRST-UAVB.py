@@ -8,7 +8,7 @@ from ultralytics import YOLO
 # model = YOLO("/home/zj/Project/MP-YOLO/MP-YOLO-8.3.7/best.pt")
 # yaml_name = "L-MP-YOLOn"
 # model = YOLO("yaml/" + yaml_name + ".yaml").load("/home/zj/Project/MP-YOLO/MP-YOLO-8.3.7/best.pt")
-yaml_name = "MP-YOLO_MPM_BFM_EMM_mpm"
+yaml_name = "MP-YOLO"
 model = YOLO("experiment/Comparative/" + yaml_name + ".yaml").load("MP-YOLO.pt")
 print(model)
 # Train the model/home/zj/Dataset/anti_uav410/test.txt/home/zj/Project/yolov11/ultralytics/yaml/yolo11n_useAllV1.yaml

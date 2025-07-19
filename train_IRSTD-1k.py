@@ -9,8 +9,10 @@ from ultralytics import YOLO
 # model = YOLO("yaml/yolo11nMultilittle_biasconv4_biasc3k2_startblock5.yaml").load("/home/zj/Project/yolov11/ultralytics/runs/detect/yolo11nMultilittle_biasconv4_biasc3k2_startblock5_batch8/weights/best.pt")
 # model = YOLO("yaml/n-MP-YOLO.yaml").load("/home/zj/Project/MP-YOLO/MP-YOLO-8.3.7/MP-YOLO/runs/detect/02.yolo11n-p1_MPBlock_MPCBlock_EMBlock3/weights/best.pt")
 # model = YOLO("/home/zj/Project/MP-YOLO/MP-YOLO-8.3.7/MP-YOLO/runs/detect/02.yolo11n-p1_MPBlock_MPCBlock_EMBlock3/weights/best.pt")
-yaml_name = "MP-YOLO_MPM_BFM_EMM_mpm"
-model = YOLO("experiment/Comparative/" + yaml_name + ".yaml").load("MP-YOLO.pt")
+yaml_name = "MP-YOLO"
+model = YOLO("experiment/Comparative/" + yaml_name + ".yaml").load("/home/zj/Project/MP-YOLO/MP-YOLO-8.3.7/MP-YOLO/runs/Comparative/02.MP-YOLO3/weights/best.pt")
+# model = YOLO("experiment/Comparative/" + yaml_name + ".yaml")
+# model = YOLO("MP-YOLO.pt")
 print(model)
 # Train the model/home/zj/Dataset/anti_uav410/test.txt/home/zj/Project/yolov11/ultralytics/yaml/yolo11n_useAllV1.yaml
 train_results = model.train(
@@ -32,7 +34,7 @@ train_results = model.train(
     # pretrained = True,#是否使用预训练模型。SIRST-UAVB
     optimizer = "auto",#优化器类型，auto 表示自动选择。
     verbose = True,#是否打印详细信息。
-    seed = 42,# 随机种子。
+    seed = 41,# 随机种子。
     deterministic=True, #是否使用确定性算法。c
     save_period = 1,
     # single_cls=False,

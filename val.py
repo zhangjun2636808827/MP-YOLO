@@ -7,7 +7,7 @@ from ultralytics import YOLO
 # model = YOLO("yaml/yolo11n.yaml")
 # yaml_name = "yolov11n-p2_EMM"
 yaml_name = "val"
-model = YOLO("/home/zj/Project/MP-YOLO/MP-YOLO-8.3.7/MP-YOLO/epoch12.pt")
+model = YOLO("epoch13.pt")
 print(model)
 # Train the model/home/zj/Dataset/anti_uav410/test.txt/home/zj/Project/yolov11/ultralytics/yaml/yolo11n_useAllV1.yaml
 train_results = model.val(
