@@ -7,17 +7,20 @@ from ultralytics import YOLO
 # model = YOLO("yaml/yolo11n.yaml")
 # yaml_name = "yolov11n-p2_EMM"
 yaml_name = "val"
-model = YOLO("epoch13.pt")
+model = YOLO("/home/zj/Project/MP-YOLO/MP-YOLO-8.3.7/MP-YOLO/runs/Comparative/00.MP-YOLO2/weights/epoch210.pt")
 print(model)
 # Train the model/home/zj/Dataset/anti_uav410/test.txt/home/zj/Project/yolov11/ultralytics/yaml/yolo11n_useAllV1.yaml
 train_results = model.val(
     name = yaml_name,
-    data="yaml/02.anti_uav410.yaml",  # path to dataset YAML
+    # data="yaml/02.anti_uav410.yaml",  # path to dataset YAML
     # data="yaml/01.SIRST-UAVB.yaml",
     # data="yaml/03.tiny-TUD.yaml",
-    # data="yaml/00.IRSTD-1k.yaml",
+    batch = 8,
+    workers = 4,#线程
+    amp = True,#加速
+    data="yaml/00.IRSTD-1k.yaml",
     save = False,
-    # conf=0.5,
+    # conf=0.7,
 )
 # print(train_results)
 # print(train_results.box.map)  # map50-95

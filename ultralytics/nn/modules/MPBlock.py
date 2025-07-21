@@ -319,42 +319,71 @@ class MPBlockV2(nn.Module):
 
 #         result = self.conv(y9) * self.conv(y10) if self.add else self.conv(y9)
 #         return result
-class MPCBottleneck(nn.Module):#v4
+# class MPCBottleneck(nn.Module):#v4
+#     def __init__(self, c1, c2, shortcut=True, g=1, k=(3, 3), e=0.5):
+#         super().__init__()
+#         self.pad1 = nn.ZeroPad2d(padding=((1, 1, 1, 1)))#(2,1,1,0)
+#         self.pad2 = nn.ZeroPad2d(padding=((0, 2, 1, 1)))#(1,2,1,0)
+#         self.pad3 = nn.ZeroPad2d(padding=((1, 1, 0, 2)))#(1,0,2,1)
+#         self.pad4 = nn.ZeroPad2d(padding=((0, 2, 0, 2)))#(0,1,1,2)
+
+#         self.biasconv1 = Conv(c1, c2//4, k[1], s=1,p=0, g=g)
+#         self.biasconv2 = Conv(c1, c2//4, k[1], s=1,p=0, g=g)
+#         self.biasconv3 = Conv(c1, c2//4, k[1], s=1,p=0, g=g)
+#         self.biasconv4 = Conv(c1, c2//4, k[1], s=1,p=0, g=g)
+#         self.conv5 = Conv(c1, c2//4, 1, s=1,p=0, g=g)
+#         self.conv6 = Conv(c1, c2//4, 3, s=1,p=1, g=g)
+#         self.conv7 = Conv(c1, c2//4, 5, s=1,p=2, g=g)
+#         self.conv8 = Conv(c1, c2//4, 7, s=1,p=3, g=g)
+        
+#         self.conv = Conv(c2, c2, 1, s=1)
+
+#         self.add = shortcut and c1 == c2
+
+#     def forward(self, x):
+#         # x1 = self.conv(x)
+#         y1 = self.biasconv1(self.pad1(x)) 
+#         y2 = self.biasconv2(self.pad2(x)) 
+#         y3 = self.biasconv3(self.pad3(x))
+#         y4 = self.biasconv4(self.pad4(x))
+#         y5 = self.conv5(x)
+#         y6 = self.conv6(x)
+#         y7 = self.conv7(x)
+#         y8 = self.conv8(x)
+
+#         y9 = torch.cat([y1, y2, y3, y4], dim=1)
+#         y10 = torch.cat([y5,y6,y7,y8], dim=1)
+
+#         result = self.conv(y9) + self.conv(y10) if self.add else self.conv(y9)
+#         return result
+class MPCBottleneck(nn.Module):#v5
     def __init__(self, c1, c2, shortcut=True, g=1, k=(3, 3), e=0.5):
         super().__init__()
-        self.pad1 = nn.ZeroPad2d(padding=((1, 1, 1, 1)))#(2,1,1,0)
-        self.pad2 = nn.ZeroPad2d(padding=((0, 2, 1, 1)))#(1,2,1,0)
-        self.pad3 = nn.ZeroPad2d(padding=((1, 1, 0, 2)))#(1,0,2,1)
-        self.pad4 = nn.ZeroPad2d(padding=((0, 2, 0, 2)))#(0,1,1,2)
+        self.c_ = int(c2 * e)
+        self.pad1 = nn.ZeroPad2d(padding=((0, 2, 1, 1)))#(2,1,1,0)
+        self.pad2 = nn.ZeroPad2d(padding=((2, 0, 1, 1)))#(1,2,1,0)
+        self.pad3 = nn.ZeroPad2d(padding=((1, 1, 2, 0)))#(1,0,2,1)
+        self.pad4 = nn.ZeroPad2d(padding=((1, 1, 0, 2)))#(0,1,1,2)
 
-        self.biasconv1 = Conv(c1, c2//4, k[1], s=1,p=0, g=g)
-        self.biasconv2 = Conv(c1, c2//4, k[1], s=1,p=0, g=g)
-        self.biasconv3 = Conv(c1, c2//4, k[1], s=1,p=0, g=g)
-        self.biasconv4 = Conv(c1, c2//4, k[1], s=1,p=0, g=g)
-        self.conv5 = Conv(c1, c2//4, 1, s=1,p=0, g=g)
-        self.conv6 = Conv(c1, c2//4, 3, s=1,p=1, g=g)
-        self.conv7 = Conv(c1, c2//4, 5, s=1,p=2, g=g)
-        self.conv8 = Conv(c1, c2//4, 7, s=1,p=3, g=g)
-        
-        self.conv = Conv(c2, c2, 1, s=1)
+        self.biasconv1 = Conv(self.c_, c2//4, k[1], s=1,p=0, g=g)
+        self.biasconv2 = Conv(self.c_, c2//4, k[1], s=1,p=0, g=g)
+        self.biasconv3 = Conv(self.c_, c2//4, k[1], s=1,p=0, g=g)
+        self.biasconv4 = Conv(self.c_, c2//4, k[1], s=1,p=0, g=g)
+
+        self.conv = Conv(c1, self.c_, 3, s=1)
 
         self.add = shortcut and c1 == c2
 
     def forward(self, x):
-        # x1 = self.conv(x)
-        y1 = self.biasconv1(self.pad1(x)) 
-        y2 = self.biasconv2(self.pad2(x)) 
-        y3 = self.biasconv3(self.pad3(x))
-        y4 = self.biasconv4(self.pad4(x))
-        y5 = self.conv5(x)
-        y6 = self.conv6(x)
-        y7 = self.conv7(x)
-        y8 = self.conv8(x)
+        x1 = self.conv(x)
+        y1 = self.biasconv1(self.pad1(x1)) 
+        y2 = self.biasconv2(self.pad2(x1)) 
+        y3 = self.biasconv3(self.pad3(x1))
+        y4 = self.biasconv4(self.pad4(x1))
 
-        y9 = torch.cat([y1, y2, y3, y4], dim=1)
-        y10 = torch.cat([y5,y6,y7,y8], dim=1)
+        y5 = torch.cat([y1, y2, y3, y4], dim=1)
 
-        result = self.conv(y9) + self.conv(y10) if self.add else self.conv(y9)
+        result = x + y5 if self.add else y5
         return result
 class C3(nn.Module):
     """CSP Bottleneck with 3 convolutions."""

@@ -71,6 +71,10 @@ from ultralytics.nn.modules import (
     MPBlockV2,
     MPM, 
     BFM,
+    L2_MPM,
+    L4_MPM,
+    L8_MPM,
+    L16_MPM,
 )
 from ultralytics.utils import DEFAULT_CFG_DICT, DEFAULT_CFG_KEYS, LOGGER, colorstr, emojis, yaml_load
 from ultralytics.utils.checks import check_requirements, check_suffix, check_yaml
@@ -1018,6 +1022,10 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             MPBlockV2,
             MPM, 
             BFM,
+            L2_MPM,
+            L4_MPM,
+            L8_MPM,
+            L16_MPM,
         }:
             c1, c2 = ch[f], args[0]
             if c2 != nc:  # if c2 not equal to number of classes (i.e. for Classify() output)

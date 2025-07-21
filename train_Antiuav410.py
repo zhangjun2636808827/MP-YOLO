@@ -4,7 +4,7 @@ from ultralytics import YOLO
 
 # yaml_name = "MP-YOLO_MPM"
 # model = YOLO("yaml/" + yaml_name + ".yaml")
-yaml_name = "03.yolov11n-p2_BFM"
+yaml_name = "11.MP-YOLO_MPM_BFM"
 model = YOLO("experiment/Ablation/" + yaml_name + ".yaml")
 print(model)
 # Train the model/home/zj/Dataset/anti_uav410/test.txt/home/zj/Project/yolov11/ultralytics/yaml/yolo11n_useAllV1.yaml
@@ -15,7 +15,7 @@ train_results = model.train(
     epochs=30,  # number of training epochs
     imgsz=640,  # training image size
     device="0",  # device to run on, i.e. device=0 or device=0,1,2,3 or device=cpu
-    batch= 16,  # batch size
+    batch= 8,  # batch size
     amp = True,#加速
     visualize = True,#可以保存每一层的特征图。 
     profile = True,#可以记录每一层的计算时间。

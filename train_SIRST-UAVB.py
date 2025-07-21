@@ -9,7 +9,7 @@ from ultralytics import YOLO
 # yaml_name = "L-MP-YOLOn"
 # model = YOLO("yaml/" + yaml_name + ".yaml").load("/home/zj/Project/MP-YOLO/MP-YOLO-8.3.7/best.pt")
 yaml_name = "MP-YOLO"
-model = YOLO("experiment/Comparative/" + yaml_name + ".yaml").load("MP-YOLO.pt")
+model = YOLO("experiment/Comparative/" + yaml_name + ".yaml").load("/home/zj/Project/MP-YOLO/MP-YOLO-8.3.7/MP-YOLO/runs/Comparative/02.MP-YOLO_MPM_BFM_EMM3/weights/best.pt ")
 print(model)
 # Train the model/home/zj/Dataset/anti_uav410/test.txt/home/zj/Project/yolov11/ultralytics/yaml/yolo11n_useAllV1.yaml
 train_results = model.train(
@@ -19,11 +19,11 @@ train_results = model.train(
     epochs=700,  # number of training epochs
     imgsz=640,  # training image size
     device="0",  # device to run on, i.e. device=0 or device=0,1,2,3 or device=cpu
-    batch= 32,  # batch size
+    batch= 4,  # batch size
     amp = True,#加速
     visualize = True,#可以保存每一层的特征图。 
     profile = True,#可以记录每一层的计算时间。
-    lr0=0.01, 
+    lr0=0.02, 
     lrf=0.01,
     workers = 4,#线程
     patience = 70,#耐心参数（100轮无提升）
@@ -31,7 +31,7 @@ train_results = model.train(
     # pretrained = False,#是否使用预训练模型。
     optimizer = "auto",#优化器类型，auto 表示自动选择。
     verbose = True,#是否打印详细信息。
-    seed = 42,# 随机种子。
+    seed = 43,# 随机种子。
     deterministic=True, #是否使用确定性算法。c
     save_period = 1,
     # single_cls=False,
