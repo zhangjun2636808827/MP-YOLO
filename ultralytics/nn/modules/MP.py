@@ -70,6 +70,7 @@ class L8_MPM(nn.Module):
         self.pad2 = nn.ZeroPad2d(padding=((0, p, p, 0)))#(1,2,1,0)
         self.pad3 = nn.ZeroPad2d(padding=((p, 0, 0, p)))#(1,0,2,1)
         self.pad4 = nn.ZeroPad2d(padding=((0, p,0 , p)))#(0,1,1,2)
+        self.bias_conv = Conv(c1, c2 // 8, k, s=s, p=0)
 
     def forward(self, x):
         y1 = self.bias_conv(self.pad1(x))
