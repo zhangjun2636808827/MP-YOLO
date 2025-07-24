@@ -1,9 +1,9 @@
 #!/bin/bash  
 
 # 要监控的进程名称部分  
-PROCESS_NAME="train_SIRST-UAVB.py"  
+PROCESS_NAME="train_TUD.py"  
 # 要运行的下一个脚本命令  ./
-NEXT_COMMAND="nohup python train_TUD.py > tud.log 2>&1 &"  
+NEXT_COMMAND="nohup python train_TUD.py > tud2.log 2>&1 &"  
 
 # 无限循环，监控进程  
 while true; do  
