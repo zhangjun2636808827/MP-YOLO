@@ -1,7 +1,0 @@
-Ultralytics 8.3.7 🚀 Python-3.9.21 torch-1.13.0+cu116 CUDA:0 (NVIDIA GeForce RTX 4090 D, 24202MiB)
-MP-YOLO summary: 646 layers, 2,823,116 parameters, 0 gradients, 12.1 GFLOPs
-val: Scanning /home/zj/Dataset/IRSTD-1k/labels.cache... 201 images, 0 backgrounds, 0 corrupt: 100%|██████████| 201/201 [00:00<?, ?it/s]
-                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 13/13 [00:00<00:00, 13.31it/s]
-                   all        201        301      0.877      0.814      0.864      0.418
-Speed: 0.5ms preprocess, 2.8ms inference, 0.0ms loss, 0.2ms postprocess per image
-Results saved to /home/zj/Project/MP-YOLO/MP-YOLO-8.3.7/MP-YOLO/runs/detect/val12

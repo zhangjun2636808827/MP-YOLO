@@ -1,0 +1,10 @@
+Ultralytics 8.3.7 🚀 Python-3.9.21 torch-1.13.0+cu116 CUDA:0 (NVIDIA GeForce RTX 4090 D, 24202MiB)
+MP-YOLO summary: 646 layers, 2,823,248 parameters, 0 gradients, 12.1 GFLOPs
+val: Scanning /home/zj/Dataset/SIRST-UAVB/labels/val.cache... 600 images, 0 backgrounds, 0 corrupt: 100%|██████████| 600/600 [00:00<?, ?it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 75/75 [00:06<00:00, 11.68it/s]
+                   all        600        931       0.92      0.901      0.939      0.529
+                   uav        593        593      0.958      0.952      0.971      0.584
+                  bird        231        338      0.881      0.849      0.907      0.473
+Speed: 0.4ms preprocess, 3.0ms inference, 0.0ms loss, 2.2ms postprocess per image
+Results saved to /home/zj/Project/MP-YOLO/MP-YOLO-8.3.7/MP-YOLO/runs/detect/val7
+{'metrics/precision(B)': 0.9195237297126424, 'metrics/recall(B)': 0.9006779495912782, 'metrics/mAP50(B)': 0.9393312317698865, 'metrics/mAP50-95(B)': 0.5287304360532586, 'fitness': 0.5697905156249214}
