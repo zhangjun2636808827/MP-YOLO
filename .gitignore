@@ -1,2 +1,4 @@
 *.log  
 runs/
+ultralytics/nn/modules/EMBlock.py
+ultralytics/nn/modules/MP.py
