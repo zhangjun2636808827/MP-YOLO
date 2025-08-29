@@ -2,7 +2,7 @@ from ultralytics import YOLO
 
 # Load a model
 yaml_name = "MP-YOLO"
-model = YOLO("experiment/Comparative/" + yaml_name + ".yaml").load("/home/zj/Project/MP-YOLO/MP-YOLO-8.3.7/MP-YOLO/runs/Comparative/02.MP-YOLO3/weights/epoch10.pt")
+model = YOLO("yaml/" + yaml_name + ".yaml")
 print(model)
 
 train_results = model.train(

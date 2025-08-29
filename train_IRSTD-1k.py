@@ -1,8 +1,8 @@
 from ultralytics import YOLO
 
 # Load a model
-yaml_name = "MP-YOLOn"
-model = YOLO("checkpoints/MP-YOLO.pt")
+yaml_name = "MP-YOLO"
+model = YOLO("yaml/" + yaml_name + ".yaml")
 
 print(model)
 
