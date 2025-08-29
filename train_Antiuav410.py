@@ -3,6 +3,9 @@ from ultralytics import YOLO
 
 yaml_name = "MP-YOLO"
 model = YOLO("yaml/" + yaml_name + ".yaml")
+
+
+
 print(model)
 train_results = model.train(
     name = "02."+yaml_name,
