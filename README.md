@@ -1,5 +1,5 @@
 # MP-YOLO
-The key code is not included at present and will be added in the future.
+
 ## Installation
 `conda` virtual environment is recommended. 
 ```
